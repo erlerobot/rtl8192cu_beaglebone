@@ -264,7 +264,7 @@ EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
 ARCH=arm
 CROSS_COMPILE := arm-linux-gnueabi-
 KVER  := $(shell uname -r)
-KSRC ?= /lib/modules/$(KVER)/build
+KSRC ?= /home/victor/bbb/bb-kernel/KERNEL
 MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
 INSTALL_PREFIX :=
 endif
