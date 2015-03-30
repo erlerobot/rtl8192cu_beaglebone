@@ -38,6 +38,7 @@ CONFIG_WAKE_ON_WLAN				=	n
 
 CONFIG_PLATFORM_I386_PC = n
 CONFIG_PLATFORM_BEAGLEBONE = y
+CONFIG_PLATFORM_BEAGLEBONE_CROSS = n
 CONFIG_PLATFORM_TI_AM3517 = n
 CONFIG_PLATFORM_ANDROID_X86 = n
 CONFIG_PLATFORM_ARM_S3C2K4 = n
@@ -262,9 +263,19 @@ endif
 ifeq ($(CONFIG_PLATFORM_BEAGLEBONE), y)
 EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
 ARCH=arm
+CROSS_COMPILE := 
+KVER  := $(shell uname -r)
+KSRC ?= /lib/modules/$(KVER)/build
+MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
+INSTALL_PREFIX :=
+endif
+
+ifeq ($(CONFIG_PLATFORM_BEAGLEBONE_CROSS), y)
+EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+ARCH=arm
 CROSS_COMPILE := arm-linux-gnueabi-
 KVER  := $(shell uname -r)
-KSRC ?= /home/victor/bbb/bb-kernel/KERNEL
+KSRC ?= /Path/to/BBB_KERNEL/bb-kernel/KERNEL
 MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
 INSTALL_PREFIX :=
 endif
