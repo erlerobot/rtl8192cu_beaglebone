@@ -45,6 +45,21 @@ CONFIG_PLATFORM_BEAGLEBONE_CROSS = y
 ...
 ```
 
+At line 278 : Modify KSRC with the path to the BB-kernel 
+
+```sh
+ifeq ($(CONFIG_PLATFORM_BEAGLEBONE_CROSS), y)
+EXTRA_CFLAGS += -DCONFIG_LITTLE_ENDIAN
+ARCH=arm
+CROSS_COMPILE := arm-linux-gnueabi-
+KVER  := $(shell uname -r)
+KSRC ?= /Path/to/BBB_KERNEL/bb-kernel/KERNEL
+MODDESTDIR := /lib/modules/$(KVER)/kernel/drivers/net/wireless/
+INSTALL_PREFIX :=
+endif
+...
+```
+
 #### Testing
 
 The driver is built by running `make`, and can be tested on the BBB by loading the
